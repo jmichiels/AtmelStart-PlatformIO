@@ -578,6 +578,12 @@ drivers:
         configuration:
           usb_gclk_selection: Generic clock generator 0
 pads:
+  LED_BUILTIN:
+    name: PA10
+    definition: Atmel:SAMD21_Drivers:0.0.1::SAMD21E18A-MF::pad::PA10
+    mode: Digital output
+    user_label: LED_BUILTIN
+    configuration: null
   PA24:
     name: PA24
     definition: Atmel:SAMD21_Drivers:0.0.1::SAMD21E18A-MF::pad::PA24

@@ -120,5 +120,19 @@ void system_init(void)
 {
 	init_mcu();
 
+	// GPIO on PA10
+
+	// Set pin direction to output
+	gpio_set_pin_direction(LED_BUILTIN, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_level(LED_BUILTIN,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   false);
+
+	gpio_set_pin_function(LED_BUILTIN, GPIO_PIN_FUNCTION_OFF);
+
 	USB_DEVICE_INSTANCE_init();
 }
