@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+void delay_example(void);
+
 #ifdef __cplusplus
 }
 #endif

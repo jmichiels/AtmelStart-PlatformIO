@@ -4,9 +4,6 @@ int main(void) {
     /* Initializes MCU, drivers and middleware */
     atmel_start_init();
 
-    /* USB 'Echo' example */
-    // cdcd_acm_example();
-
     while (1) {
         delay_ms(500);
 

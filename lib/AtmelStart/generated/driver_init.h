@@ -21,10 +21,9 @@ extern "C" {
 #include <hal_io.h>
 #include <hal_sleep.h>
 
-#include "hal_usb_device.h"
+#include <hal_delay.h>
 
-void USB_DEVICE_INSTANCE_CLOCK_init(void);
-void USB_DEVICE_INSTANCE_init(void);
+void delay_driver_init(void);
 
 /**
  * \brief Perform system initialization, initialize pins and clocks for
