@@ -1,5 +1,14 @@
+#!/usr/bin/env python
+
 import os
+import sys
 import json
+import shutil
+import zipfile
+
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+
+LIBRARY_JSON = SCRIPT_DIR + '/library.json'
 
 library_json = {
     'name': 'AtmelStart',
@@ -14,9 +23,16 @@ library_json = {
     }
 }
 
-script_dir = os.path.dirname(os.path.realpath(__file__))
-MAKEFILE = script_dir + '/generated/gcc/Makefile'
-LIBRARY_JSON = script_dir + '/library.json'
+GEN_DIR = SCRIPT_DIR + '/generated'
+
+if len(sys.argv) == 2:
+    shutil.rmtree(GEN_DIR)
+    # Argument can be project zip file.
+    f = zipfile.ZipFile(sys.argv[1])
+    f.extractall(GEN_DIR)
+    f.close()
+
+MAKEFILE = GEN_DIR + '/gcc/Makefile'
 
 if not os.path.isfile(MAKEFILE):
     print("MakeFile is missing")
