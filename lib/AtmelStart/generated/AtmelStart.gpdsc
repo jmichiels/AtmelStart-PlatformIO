@@ -12,7 +12,7 @@
   <generators>
     <generator id="AtmelStart">
       <description>Atmel Start</description>
-      <select Dname="ATSAMD21E18A" Dvendor="Atmel:3"/>
+      <select Dname="ATSAMD21G18A" Dvendor="Atmel:3"/>
       <command>http://start.atmel.com/</command>
       <files>
         <file category="generator" name="atmel_start_config.atstart"/>
@@ -27,13 +27,13 @@
       <require Cclass="Device" Cgroup="Startup" Cversion="1.2.0"/>
     </condition>
     <condition id="ARMCC, GCC, IAR">
-      <require Dname="ATSAMD21E18A"/>
+      <require Dname="ATSAMD21G18A"/>
       <accept Tcompiler="ARMCC"/>
       <accept Tcompiler="GCC"/>
       <accept Tcompiler="IAR"/>
     </condition>
     <condition id="GCC">
-      <require Dname="ATSAMD21E18A"/>
+      <require Dname="ATSAMD21G18A"/>
       <accept Tcompiler="GCC"/>
     </condition>
   </conditions>
@@ -55,7 +55,6 @@
         <file category="header" condition="ARMCC, GCC, IAR" name="hal/include/hpl_init.h"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="hal/include/hpl_irq.h"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="hal/include/hpl_sleep.h"/>
-        <file category="header" condition="ARMCC, GCC, IAR" name="hal/include/hpl_time_measure.h"/>
         <file category="source" condition="ARMCC, GCC, IAR" name="hal/src/hal_atomic.c"/>
         <file category="source" condition="ARMCC, GCC, IAR" name="hal/src/hal_delay.c"/>
         <file category="source" condition="ARMCC, GCC, IAR" name="hal/src/hal_gpio.c"/>
@@ -120,14 +119,12 @@
         <file category="header" condition="ARMCC, GCC, IAR" name="hpl/pm/hpl_pm_base.h"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="hpl/port/hpl_gpio_base.h"/>
         <file category="source" condition="ARMCC, GCC, IAR" name="hpl/sysctrl/hpl_sysctrl.c"/>
-        <file category="source" condition="ARMCC, GCC, IAR" name="hpl/systick/hpl_systick.c"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="atmel_start.h"/>
         <file category="source" condition="ARMCC, GCC, IAR" name="atmel_start.c"/>
         <file attr="config" category="header" condition="ARMCC, GCC, IAR" name="config/hpl_dmac_config.h"/>
         <file attr="config" category="header" condition="ARMCC, GCC, IAR" name="config/hpl_gclk_config.h"/>
         <file attr="config" category="header" condition="ARMCC, GCC, IAR" name="config/hpl_pm_config.h"/>
         <file attr="config" category="header" condition="ARMCC, GCC, IAR" name="config/hpl_sysctrl_config.h"/>
-        <file attr="config" category="header" condition="ARMCC, GCC, IAR" name="config/hpl_systick_config.h"/>
         <file attr="config" category="header" condition="ARMCC, GCC, IAR" name="config/peripheral_clk_config.h"/>
         <file category="include" condition="ARMCC, GCC, IAR" name=""/>
         <file category="include" condition="ARMCC, GCC, IAR" name="config"/>
@@ -140,7 +137,6 @@
         <file category="include" condition="ARMCC, GCC, IAR" name="hpl/pm"/>
         <file category="include" condition="ARMCC, GCC, IAR" name="hpl/port"/>
         <file category="include" condition="ARMCC, GCC, IAR" name="hpl/sysctrl"/>
-        <file category="include" condition="ARMCC, GCC, IAR" name="hpl/systick"/>
         <file category="include" condition="ARMCC, GCC, IAR" name="hri"/>
         <file category="include" condition="ARMCC, GCC, IAR" name=""/>
       </files>

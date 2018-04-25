@@ -46,7 +46,7 @@
 // <i> Indicates whether configuration for OSC8M is enabled or not
 // <id> enable_osc8m
 #ifndef CONF_OSC8M_CONFIG
-#define CONF_OSC8M_CONFIG 0
+#define CONF_OSC8M_CONFIG 1
 #endif
 
 // <h> 8MHz Internal Oscillator (OSC8M) Control
@@ -54,7 +54,7 @@
 // <i> Indicates whether Internal 8 Mhz Oscillator is enabled or not
 // <id> osc8m_arch_enable
 #ifndef CONF_OSC8M_ENABLE
-#define CONF_OSC8M_ENABLE 0
+#define CONF_OSC8M_ENABLE 1
 #endif
 
 // <q> On Demand Control
@@ -126,7 +126,7 @@
 // <i> If this bit is 1, the oscillator will only be running when requested by a peripheral.
 // <id> osc32k_arch_ondemand
 #ifndef CONF_OSC32K_ONDEMAND
-#define CONF_OSC32K_ONDEMAND 0
+#define CONF_OSC32K_ONDEMAND 1
 #endif
 
 // <q> Run In Standby
@@ -142,7 +142,7 @@
 // <i> Enable 32 Khz Output
 // <id> osc32k_arch_en32k
 #ifndef CONF_OSC32K_EN32K
-#define CONF_OSC32K_EN32K 1
+#define CONF_OSC32K_EN32K 0
 #endif
 
 // <q> Enable 1K
@@ -172,7 +172,7 @@
 // <i> Default: 10 Clock Cycles (305us)
 // <id> osc32k_arch_startup
 #ifndef CONF_OSC32K_STARTUP
-#define CONF_OSC32K_STARTUP CONF_OSC_STARTUP_TIME_183MCS
+#define CONF_OSC32K_STARTUP CONF_OSC_STARTUP_TIME_92MCS
 #endif
 
 // <q> Overwrite Default Osc Calibration
@@ -410,7 +410,7 @@
 // <i> Indicates whether configuration for DFLL is enabled or not
 // <id> enable_dfll48m
 #ifndef CONF_DFLL_CONFIG
-#define CONF_DFLL_CONFIG 1
+#define CONF_DFLL_CONFIG 0
 #endif
 
 // <y> Reference Clock Source
@@ -425,7 +425,7 @@
 // <i> Select the clock source.
 // <id> dfll48m_ref_clock
 #ifndef CONF_DFLL_GCLK
-#define CONF_DFLL_GCLK GCLK_CLKCTRL_GEN_GCLK1_Val
+#define CONF_DFLL_GCLK GCLK_CLKCTRL_GEN_GCLK3_Val
 #endif
 
 // <h> DFLL Control
@@ -433,7 +433,7 @@
 // <i> Indicates whether DFLL is enabled or not
 // <id> dfll48m_arch_enable
 #ifndef CONF_DFLL_ENABLE
-#define CONF_DFLL_ENABLE 1
+#define CONF_DFLL_ENABLE 0
 #endif
 
 // <q> Wait Lock
@@ -470,7 +470,7 @@
 // <i> If this bit is 1: the DFLL will only be running when requested by a peripheral.
 // <id> dfll48m_arch_ondemand
 #ifndef CONF_DFLL_ONDEMAND
-#define CONF_DFLL_ONDEMAND 0
+#define CONF_DFLL_ONDEMAND 1
 #endif
 
 // <q> Run In Standby
@@ -520,7 +520,7 @@
 // <i> Mode
 // <id> dfll48m_mode
 #ifndef CONF_DFLL_MODE
-#define CONF_DFLL_MODE CONF_DFLL_CLOSED_LOOP_MODE
+#define CONF_DFLL_MODE CONF_DFLL_OPEN_LOOP_MODE
 #endif
 
 // <o> Coarse Maximum Step <0x0-0x1F>
@@ -540,7 +540,7 @@
 //  <i> Default: 0
 //  <id> dfll48m_mul
 #ifndef CONF_DFLL_MUL
-#define CONF_DFLL_MUL 1465
+#define CONF_DFLL_MUL 0
 #endif
 
 // <e> DFLL Calibration Overwrite

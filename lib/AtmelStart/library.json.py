@@ -8,7 +8,7 @@ library_json = {
         'libArchive': False,
         'srcFilter': [],
         'flags': [
-            "!echo \"-Wl,-T$(pwd)/generated/samd21a/gcc/gcc/samd21e18a_flash.ld\"",
+            "!echo \"-Wl,-T$(pwd)/generated/samd21a/gcc/gcc/samd21g18a_flash.ld\"",
             "-Wl,--section-start=.text=0x2000"
         ],
     }

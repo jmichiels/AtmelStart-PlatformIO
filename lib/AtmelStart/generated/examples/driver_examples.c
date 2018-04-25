@@ -9,8 +9,3 @@
 #include "driver_examples.h"
 #include "driver_init.h"
 #include "utils.h"
-
-void delay_example(void)
-{
-	delay_ms(5000);
-}

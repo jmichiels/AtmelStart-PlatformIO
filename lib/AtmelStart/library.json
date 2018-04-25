@@ -1,7 +1,7 @@
 {
   "build": {
     "flags": [
-      "!echo \"-Wl,-T$(pwd)/generated/samd21a/gcc/gcc/samd21e18a_flash.ld\"", 
+      "!echo \"-Wl,-T$(pwd)/generated/samd21a/gcc/gcc/samd21g18a_flash.ld\"", 
       "-Wl,--section-start=.text=0x2000", 
       "-Igenerated/", 
       "-Igenerated/config", 
@@ -14,7 +14,6 @@
       "-Igenerated/hpl/pm", 
       "-Igenerated/hpl/port", 
       "-Igenerated/hpl/sysctrl", 
-      "-Igenerated/hpl/systick", 
       "-Igenerated/hri", 
       "-Igenerated/", 
       "-Igenerated/CMSIS/Include", 
@@ -23,7 +22,6 @@
     "libArchive": false, 
     "srcFilter": [
       "+<generated/hal/src/hal_io.c>", 
-      "+<generated/hpl/systick/hpl_systick.c>", 
       "+<generated/samd21a/gcc/gcc/startup_samd21.c>", 
       "+<generated/hal/utils/src/utils_syscalls.c>", 
       "+<generated/hal/src/hal_delay.c>", 

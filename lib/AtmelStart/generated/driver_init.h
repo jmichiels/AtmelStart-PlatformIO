@@ -21,10 +21,6 @@ extern "C" {
 #include <hal_io.h>
 #include <hal_sleep.h>
 
-#include <hal_delay.h>
-
-void delay_driver_init(void);
-
 /**
  * \brief Perform system initialization, initialize pins and clocks for
  * peripherals

@@ -44,7 +44,7 @@
 // <i> Indicates whether Improve Duty Cycle is enabled or not
 // <id> gclk_arch_gen_0_idc
 #ifndef CONF_GCLK_GEN_0_IDC
-#define CONF_GCLK_GEN_0_IDC 1
+#define CONF_GCLK_GEN_0_IDC 0
 #endif
 
 // <q> Generic Clock Generator Enable
@@ -63,11 +63,11 @@
 // <GCLK_GENCTRL_SRC_XOSC32K"> 32kHz External Crystal Oscillator (XOSC32K)
 // <GCLK_GENCTRL_SRC_OSC8M"> 8MHz Internal Oscillator (OSC8M)
 // <GCLK_GENCTRL_SRC_DFLL48M"> Digital Frequency Locked Loop (DFLL48M)
-// <GCLK_GENCTRL_SRC_FDPLL"> Fractional Digital Phase Locked Loop (FDPLL96M)
+// <GCLK_GENCTRL_SRC_DPLL96M"> Fractional Digital Phase Locked Loop (FDPLL96M)
 // <i> This defines the clock source for generic clock generator 0
 // <id> gclk_gen_0_oscillator
 #ifndef CONF_GCLK_GEN_0_SRC
-#define CONF_GCLK_GEN_0_SRC GCLK_GENCTRL_SRC_DFLL48M
+#define CONF_GCLK_GEN_0_SRC GCLK_GENCTRL_SRC_OSC8M
 #endif
 // </h>
 
@@ -84,7 +84,7 @@
 // <i> Indicates whether generic clock 1 configuration is enabled or not
 // <id> enable_gclk_gen_1
 #ifndef CONF_GCLK_GENERATOR_1_CONFIG
-#define CONF_GCLK_GENERATOR_1_CONFIG 1
+#define CONF_GCLK_GENERATOR_1_CONFIG 0
 #endif
 
 // <h> Generic Clock Generator Control
@@ -120,14 +120,14 @@
 // <i> Indicates whether Improve Duty Cycle is enabled or not
 // <id> gclk_arch_gen_1_idc
 #ifndef CONF_GCLK_GEN_1_IDC
-#define CONF_GCLK_GEN_1_IDC 1
+#define CONF_GCLK_GEN_1_IDC 0
 #endif
 
 // <q> Generic Clock Generator Enable
 // <i> Indicates whether Generic Clock Generator Enable is enabled or not
 // <id> gclk_arch_gen_1_enable
 #ifndef CONF_GCLK_GEN_1_GENEN
-#define CONF_GCLK_GEN_1_GENEN 1
+#define CONF_GCLK_GEN_1_GENEN 0
 #endif
 
 // <y> Generic clock generator 1 source
@@ -138,11 +138,11 @@
 // <GCLK_GENCTRL_SRC_XOSC32K"> 32kHz External Crystal Oscillator (XOSC32K)
 // <GCLK_GENCTRL_SRC_OSC8M"> 8MHz Internal Oscillator (OSC8M)
 // <GCLK_GENCTRL_SRC_DFLL48M"> Digital Frequency Locked Loop (DFLL48M)
-// <GCLK_GENCTRL_SRC_FDPLL"> Fractional Digital Phase Locked Loop (FDPLL96M)
+// <GCLK_GENCTRL_SRC_DPLL96M"> Fractional Digital Phase Locked Loop (FDPLL96M)
 // <i> This defines the clock source for generic clock generator 1
 // <id> gclk_gen_1_oscillator
 #ifndef CONF_GCLK_GEN_1_SRC
-#define CONF_GCLK_GEN_1_SRC GCLK_GENCTRL_SRC_OSCULP32K
+#define CONF_GCLK_GEN_1_SRC GCLK_GENCTRL_SRC_XOSC
 #endif
 // </h>
 
@@ -214,7 +214,7 @@
 // <GCLK_GENCTRL_SRC_XOSC32K"> 32kHz External Crystal Oscillator (XOSC32K)
 // <GCLK_GENCTRL_SRC_OSC8M"> 8MHz Internal Oscillator (OSC8M)
 // <GCLK_GENCTRL_SRC_DFLL48M"> Digital Frequency Locked Loop (DFLL48M)
-// <GCLK_GENCTRL_SRC_FDPLL"> Fractional Digital Phase Locked Loop (FDPLL96M)
+// <GCLK_GENCTRL_SRC_DPLL96M"> Fractional Digital Phase Locked Loop (FDPLL96M)
 // <i> This defines the clock source for generic clock generator 2
 // <id> gclk_gen_2_oscillator
 #ifndef CONF_GCLK_GEN_2_SRC
@@ -290,7 +290,7 @@
 // <GCLK_GENCTRL_SRC_XOSC32K"> 32kHz External Crystal Oscillator (XOSC32K)
 // <GCLK_GENCTRL_SRC_OSC8M"> 8MHz Internal Oscillator (OSC8M)
 // <GCLK_GENCTRL_SRC_DFLL48M"> Digital Frequency Locked Loop (DFLL48M)
-// <GCLK_GENCTRL_SRC_FDPLL"> Fractional Digital Phase Locked Loop (FDPLL96M)
+// <GCLK_GENCTRL_SRC_DPLL96M"> Fractional Digital Phase Locked Loop (FDPLL96M)
 // <i> This defines the clock source for generic clock generator 3
 // <id> gclk_gen_3_oscillator
 #ifndef CONF_GCLK_GEN_3_SRC
@@ -366,7 +366,7 @@
 // <GCLK_GENCTRL_SRC_XOSC32K"> 32kHz External Crystal Oscillator (XOSC32K)
 // <GCLK_GENCTRL_SRC_OSC8M"> 8MHz Internal Oscillator (OSC8M)
 // <GCLK_GENCTRL_SRC_DFLL48M"> Digital Frequency Locked Loop (DFLL48M)
-// <GCLK_GENCTRL_SRC_FDPLL"> Fractional Digital Phase Locked Loop (FDPLL96M)
+// <GCLK_GENCTRL_SRC_DPLL96M"> Fractional Digital Phase Locked Loop (FDPLL96M)
 // <i> This defines the clock source for generic clock generator 4
 // <id> gclk_gen_4_oscillator
 #ifndef CONF_GCLK_GEN_4_SRC
@@ -442,7 +442,7 @@
 // <GCLK_GENCTRL_SRC_XOSC32K"> 32kHz External Crystal Oscillator (XOSC32K)
 // <GCLK_GENCTRL_SRC_OSC8M"> 8MHz Internal Oscillator (OSC8M)
 // <GCLK_GENCTRL_SRC_DFLL48M"> Digital Frequency Locked Loop (DFLL48M)
-// <GCLK_GENCTRL_SRC_FDPLL"> Fractional Digital Phase Locked Loop (FDPLL96M)
+// <GCLK_GENCTRL_SRC_DPLL96M"> Fractional Digital Phase Locked Loop (FDPLL96M)
 // <i> This defines the clock source for generic clock generator 5
 // <id> gclk_gen_5_oscillator
 #ifndef CONF_GCLK_GEN_5_SRC
@@ -518,7 +518,7 @@
 // <GCLK_GENCTRL_SRC_XOSC32K"> 32kHz External Crystal Oscillator (XOSC32K)
 // <GCLK_GENCTRL_SRC_OSC8M"> 8MHz Internal Oscillator (OSC8M)
 // <GCLK_GENCTRL_SRC_DFLL48M"> Digital Frequency Locked Loop (DFLL48M)
-// <GCLK_GENCTRL_SRC_FDPLL"> Fractional Digital Phase Locked Loop (FDPLL96M)
+// <GCLK_GENCTRL_SRC_DPLL96M"> Fractional Digital Phase Locked Loop (FDPLL96M)
 // <i> This defines the clock source for generic clock generator 6
 // <id> gclk_gen_6_oscillator
 #ifndef CONF_GCLK_GEN_6_SRC
@@ -594,7 +594,7 @@
 // <GCLK_GENCTRL_SRC_XOSC32K"> 32kHz External Crystal Oscillator (XOSC32K)
 // <GCLK_GENCTRL_SRC_OSC8M"> 8MHz Internal Oscillator (OSC8M)
 // <GCLK_GENCTRL_SRC_DFLL48M"> Digital Frequency Locked Loop (DFLL48M)
-// <GCLK_GENCTRL_SRC_FDPLL"> Fractional Digital Phase Locked Loop (FDPLL96M)
+// <GCLK_GENCTRL_SRC_DPLL96M"> Fractional Digital Phase Locked Loop (FDPLL96M)
 // <i> This defines the clock source for generic clock generator 7
 // <id> gclk_gen_7_oscillator
 #ifndef CONF_GCLK_GEN_7_SRC

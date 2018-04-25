@@ -27,7 +27,7 @@ endif
 # List the subdirectories for creating object files
 SUB_DIRS +=  \
  \
-hpl/systick \
+samd21a/gcc/gcc \
 hpl/dmac \
 hal/src \
 samd21a/gcc \
@@ -36,13 +36,11 @@ hpl/sysctrl \
 hal/utils/src \
 examples \
 hpl/gclk \
-samd21a/gcc/gcc \
 hpl/core
 
 # List the object files
 OBJS +=  \
 hal/src/hal_io.o \
-hpl/systick/hpl_systick.o \
 samd21a/gcc/gcc/startup_samd21.o \
 hal/utils/src/utils_syscalls.o \
 hal/src/hal_delay.o \
@@ -67,7 +65,6 @@ hal/src/hal_atomic.o
 
 OBJS_AS_ARGS +=  \
 "hal/src/hal_io.o" \
-"hpl/systick/hpl_systick.o" \
 "samd21a/gcc/gcc/startup_samd21.o" \
 "hal/utils/src/utils_syscalls.o" \
 "hal/src/hal_delay.o" \
@@ -97,7 +94,6 @@ DEPS_AS_ARGS +=  \
 "samd21a/gcc/gcc/startup_samd21.d" \
 "hal/src/hal_gpio.d" \
 "hal/src/hal_io.d" \
-"hpl/systick/hpl_systick.d" \
 "hal/utils/src/utils_syscalls.d" \
 "hpl/core/hpl_core_m0plus_base.d" \
 "hal/utils/src/utils_list.d" \
@@ -140,7 +136,7 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 -Wl,-Map="$(OUTPUT_FILE_NAME).map" --specs=nano.specs -Wl,--gc-sections -mcpu=cortex-m0plus \
  \
  \
--T"../samd21a/gcc/gcc/samd21e18a_flash.ld" \
+-T"../samd21a/gcc/gcc/samd21g18a_flash.ld" \
 -L"../samd21a/gcc/gcc"
 	@echo Finished building target: $@
 
@@ -160,8 +156,8 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	@echo Building file: $<
 	@echo ARM/GNU C Compiler
 	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
--D__SAMD21E18A__ -mcpu=cortex-m0plus  \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
+-D__SAMD21G18A__ -mcpu=cortex-m0plus  \
+-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
@@ -169,8 +165,8 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	@echo Building file: $<
 	@echo ARM/GNU Assembler
 	$(QUOTE)arm-none-eabi-as$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
--D__SAMD21E18A__ -mcpu=cortex-m0plus  \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
+-D__SAMD21G18A__ -mcpu=cortex-m0plus  \
+-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
@@ -178,8 +174,8 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	@echo Building file: $<
 	@echo ARM/GNU Preprocessing Assembler
 	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
--D__SAMD21E18A__ -mcpu=cortex-m0plus  \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
+-D__SAMD21G18A__ -mcpu=cortex-m0plus  \
+-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
