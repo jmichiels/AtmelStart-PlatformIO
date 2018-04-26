@@ -1,9 +1,23 @@
 #include <atmel_start.h>
-#include <usb/class/cdc/usb_protocol_cdc.h>
-#include <samd21a/include/component/nvmctrl.h>
+#include <stdarg.h>
+#include <stdio.h>
 
+#define USB_PRINT()
 
-#define FLASH_APP_START (0x00002000)
+/**
+ * \brief Print formatted text over USB.
+ */
+static int usb_printf(const char *fmt, ...)
+{
+    char text[255];
+
+    va_list args;
+    va_start(args, fmt);
+    vsprintf(text, fmt, args);
+    va_end(args);
+
+    return cdcdf_acm_write(text, strlen(text));
+}
 
 /**
  * \brief Reset the device.
@@ -13,6 +27,8 @@ static void reset()
     NVIC_SystemReset();
     while (true);
 }
+
+#define FLASH_APP_START (0x00002000)
 
 /**
  * \brief Erase the application then reset the device.
@@ -25,14 +41,25 @@ static void erase()
     }
 }
 
+static uint8_t usb_buffer[CONF_USB_CDCD_ACM_DATA_BULKIN_MAXPKSZ];
+
 /**
- * \brief Callback invoked when host read.
+ * \brief Callback invoked when host request bulk read.
  */
 static bool usb_cb_read(const uint8_t ep, const enum usb_xfer_code rc, const uint32_t count)
 {
-    gpio_set_pin_level(LED_BUILTIN, 1);
-    uint8_t buffer[] = "hello\n";
-    cdcdf_acm_write(buffer, strlen(buffer));
+    cdcdf_acm_write((uint8_t *)usb_buffer, count);
+
+    /* No error. */
+    return false;
+}
+
+/**
+ * \brief Callback invoked when host request bulk write.
+ */
+static bool usb_cb_write(const uint8_t ep, const enum usb_xfer_code rc, const uint32_t count)
+{
+    cdcdf_acm_read((uint8_t *)usb_buffer, sizeof(usb_buffer));
 
     /* No error. */
     return false;
@@ -46,10 +73,13 @@ static bool usb_cb_read(const uint8_t ep, const enum usb_xfer_code rc, const uin
 static bool usb_cb_state_c(usb_cdc_control_signal_t state)
 {
     if (state.rs232.DTR) {
+        gpio_set_pin_level(LED_BUILTIN, 1);
         /* Data Terminal Ready */
-        // cdcdf_acm_register_callback(CDCDF_ACM_CB_WRITE, (FUNC_PTR)usb_cb_read);
+        cdcdf_acm_register_callback(CDCDF_ACM_CB_READ, (FUNC_PTR)usb_cb_read);
+        cdcdf_acm_register_callback(CDCDF_ACM_CB_WRITE, (FUNC_PTR)usb_cb_write);
     } else {
-        /* Auto-reset into the bootloader is triggered when the port, already open at 1200 bps, is closed */
+        gpio_set_pin_level(LED_BUILTIN, 0);
+        /* Erase and reset when the port is opened then closed at 1200 bps */
         if (cdcdf_acm_get_line_coding()->dwDTERate == USB_RESET_DATARATE) {
             erase();
         }
@@ -64,15 +94,18 @@ int main(void)
     atmel_start_init();
 
     while (!cdcdf_acm_is_enabled()) {
-        // wait cdc acm to be installed
+        /* Wait cdc acm to be enabled */
     };
 
+    /* Register callback on USB CDC state change */
     cdcdf_acm_register_callback(CDCDF_ACM_CB_STATE_C, (FUNC_PTR)usb_cb_state_c);
+
+    uint8_t count = 0;
 
     while (1) {
         delay_ms(500);
 
-        // Just blink the built-in led.
-       gpio_toggle_pin_level(LED_BUILTIN);
+        /* Print over USB serial */
+        usb_printf("blink: %d\n", count++);
     }
 }

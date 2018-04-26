@@ -6,6 +6,13 @@ board:
 details: null
 application: null
 middlewares:
+  SLEEP_MANAGER_0:
+    user_label: SLEEP_MANAGER_0
+    configuration: {}
+    definition: Atmel:Sleep_Manager:0.0.1::Sleep_manager
+    functionality: Sleep_Manager
+    api: Sleep-Manager:Sleep-Manager:API
+    dependencies: {}
   USB_CHAPTER_9:
     user_label: USB_CHAPTER_9
     configuration: {}

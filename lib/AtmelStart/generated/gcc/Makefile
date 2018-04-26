@@ -29,6 +29,7 @@ SUB_DIRS +=  \
  \
 hpl/usb \
 usb/class/cdc/device \
+sleep_manager \
 usb/device \
 hpl/dmac \
 hal/src \
@@ -59,10 +60,12 @@ hpl/core/hpl_core_m0plus_base.o \
 hal/utils/src/utils_assert.o \
 usb_start.o \
 hpl/sysctrl/hpl_sysctrl.o \
+sleep_manager/sleep_manager.o \
 usb/usb_protocol.o \
 hpl/gclk/hpl_gclk.o \
 hal/src/hal_flash.o \
 hal/src/hal_init.o \
+sleep_manager_main.o \
 hal/src/hal_usb_device.o \
 main.o \
 samd21a/gcc/system_samd21.o \
@@ -91,10 +94,12 @@ OBJS_AS_ARGS +=  \
 "hal/utils/src/utils_assert.o" \
 "usb_start.o" \
 "hpl/sysctrl/hpl_sysctrl.o" \
+"sleep_manager/sleep_manager.o" \
 "usb/usb_protocol.o" \
 "hpl/gclk/hpl_gclk.o" \
 "hal/src/hal_flash.o" \
 "hal/src/hal_init.o" \
+"sleep_manager_main.o" \
 "hal/src/hal_usb_device.o" \
 "main.o" \
 "samd21a/gcc/system_samd21.o" \
@@ -114,7 +119,7 @@ DEPS := $(OBJS:%.o=%.d)
 DEPS_AS_ARGS +=  \
 "usb/usb_protocol.d" \
 "samd21a/gcc/gcc/startup_samd21.d" \
-"hal/src/hal_gpio.d" \
+"hal/utils/src/utils_event.d" \
 "hal/src/hal_io.d" \
 "hal/utils/src/utils_syscalls.d" \
 "usb/class/cdc/device/cdcdf_acm.d" \
@@ -130,14 +135,16 @@ DEPS_AS_ARGS +=  \
 "hal/src/hal_flash.d" \
 "hpl/gclk/hpl_gclk.d" \
 "hal/src/hal_usb_device.d" \
-"hpl/dmac/hpl_dmac.d" \
+"sleep_manager_main.d" \
 "hal/src/hal_init.d" \
+"sleep_manager/sleep_manager.d" \
+"hpl/dmac/hpl_dmac.d" \
 "driver_init.d" \
 "samd21a/gcc/system_samd21.d" \
 "main.d" \
 "examples/driver_examples.d" \
 "hal/src/hal_sleep.d" \
-"hal/utils/src/utils_event.d" \
+"hal/src/hal_gpio.d" \
 "hal/src/hal_atomic.d" \
 "usb/device/usbdc.d" \
 "hpl/pm/hpl_pm.d" \
@@ -186,7 +193,7 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	@echo ARM/GNU C Compiler
 	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hpl/usb" -I"../hri" -I"../" -I"../config" -I"../usb" -I"../usb/class/cdc" -I"../usb/class/cdc/device" -I"../usb/device" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
+-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hpl/usb" -I"../hri" -I"../" -I"../config" -I"../sleep_manager" -I"../" -I"../config" -I"../usb" -I"../usb/class/cdc" -I"../usb/class/cdc/device" -I"../usb/device" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
@@ -195,7 +202,7 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	@echo ARM/GNU Assembler
 	$(QUOTE)arm-none-eabi-as$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hpl/usb" -I"../hri" -I"../" -I"../config" -I"../usb" -I"../usb/class/cdc" -I"../usb/class/cdc/device" -I"../usb/device" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
+-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hpl/usb" -I"../hri" -I"../" -I"../config" -I"../sleep_manager" -I"../" -I"../config" -I"../usb" -I"../usb/class/cdc" -I"../usb/class/cdc/device" -I"../usb/device" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
@@ -204,7 +211,7 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	@echo ARM/GNU Preprocessing Assembler
 	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hpl/usb" -I"../hri" -I"../" -I"../config" -I"../usb" -I"../usb/class/cdc" -I"../usb/class/cdc/device" -I"../usb/device" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
+-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hpl/usb" -I"../hri" -I"../" -I"../config" -I"../sleep_manager" -I"../" -I"../config" -I"../usb" -I"../usb/class/cdc" -I"../usb/class/cdc/device" -I"../usb/device" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
