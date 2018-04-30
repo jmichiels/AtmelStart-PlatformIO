@@ -73,13 +73,12 @@ static bool usb_cb_write(const uint8_t ep, const enum usb_xfer_code rc, const ui
 static bool usb_cb_state_c(usb_cdc_control_signal_t state)
 {
     if (state.rs232.DTR) {
-        gpio_set_pin_level(LED_BUILTIN, 1);
         /* Data Terminal Ready */
         cdcdf_acm_register_callback(CDCDF_ACM_CB_READ, (FUNC_PTR)usb_cb_read);
         cdcdf_acm_register_callback(CDCDF_ACM_CB_WRITE, (FUNC_PTR)usb_cb_write);
     } else {
         gpio_set_pin_level(LED_BUILTIN, 0);
-        /* Erase and reset when the port is opened then closed at 1200 bps */
+        /* Erase and reset when the port is opened then closed at 1200 bps (arduino style)*/
         if (cdcdf_acm_get_line_coding()->dwDTERate == USB_RESET_DATARATE) {
             erase();
         }
@@ -107,5 +106,8 @@ int main(void)
 
         /* Print over USB serial */
         usb_printf("blink: %d\n", count++);
+
+        /* Toggle built-in LED */
+        gpio_toggle_pin_level(LED_BUILTIN);
     }
 }
